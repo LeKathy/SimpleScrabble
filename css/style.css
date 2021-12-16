@@ -1,3 +1,15 @@
+/*
+FILE NAME: style.css
+ASSIGNMENT: SIMPLIFIED SCRABBLE GAME
+Kathy Le, UMass Lowell Computer Science, Kathy_Le@student.uml.edu, khle@cs.uml.edu
+Copyright (c) 2021 by Kathy Le. All rights reserved. May be freely copied or excerpted    
+for educational purposes with credit to the author. 
+    
+Project Description: The goal of this program project assignment is to further
+familiarize with HTML, CSS, JavaScript, JSON. We are to recreate the iconic game 
+of one-line Scrabble.
+*/
+
 #header{
     text-align: center;
     text-transform: uppercase;
