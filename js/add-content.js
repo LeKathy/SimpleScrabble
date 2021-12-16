@@ -1,3 +1,16 @@
+/*
+FILE NAME: add-content.js
+ASSIGNMENT: SIMPLIFIED SCRABBLE GAME
+Kathy Le, UMass Lowell Computer Science, Kathy_Le@student.uml.edu, khle@cs.uml.edu
+Copyright (c) 2021 by Kathy Le. All rights reserved. May be freely copied or excerpted    
+for educational purposes with credit to the author. 
+     
+PROJECT DESCRIPTION:  The goal of this program project assignment is to further
+familiarize with HTML, CSS, JavaScript, JSON. We are to recreate the iconic game 
+of one-line Scrabble.
+PROGRAM FILE GOAL: This file will dictate the behavior of the website and how to execute and make the buttons function
+*/
+
 $(function() {
     var tilePool = [];
     var currentRack = [];
@@ -9,29 +22,29 @@ $(function() {
     var currentScore = 0;
     var totalScore = 0;
 
-    $.get("https://lekathy.github.io/SimpleScrabble/pieces.json")
+    $.get("https://lekathy.github.io/SimpleScrabble/pieces.json") //This is to get the tile pieces and apply to the game
     .done(function(response) {
         tileJSON = response.pieces;
         initializeGame();
       });
 
-    $("#innerRack").droppable({
+    $("#innerRack").droppable({ //This allows the tiles to be dropped into the tiles at the exact placement
        tolerance: "fit"
      })
 
-    $("#tileBoard div").droppable({
+    $("#tileBoard div").droppable({//This is to allow drag and drop
        tolerance: "pointer",
        drop: handleDropEvent,
        out: handleTileRemoved
      })
 
-     function initializeGame(){
+     function initializeGame(){//Start the game or restart a new game
         fillTilePool();
         initializeRackTiles();
         addTilesToRack(true);
       }
 
-      function fillTilePool(){
+      function fillTilePool(){ //Push in required tiles from the 27 tiles selection
         for(i = 0; i < 27; i++){
           var currentTile = tileJSON[i];
           for(k = 0; k < currentTile.amount; k++){
@@ -40,7 +53,7 @@ $(function() {
         }
       }
 
-      function initializeRackTiles(){
+      function initializeRackTiles(){ //starting tile amount and checking the tile amount on rack
         remainingTiles = (tilePool.length < 7) ? tilePool.length : 7; 
         if(remainingTiles == 0){ 
           alert("There are no tiles remaining. Play again!");
@@ -51,10 +64,10 @@ $(function() {
            currentRack.push(tilePool[rand]); 
            tilePool.splice(rand, 1); 
         }
-        $("#tiles_remaining").text("Tiles Remaining: " + tilePool.length) 
+        $("#tiles_remaining").text("Tiles Remaining: " + tilePool.length) //lets player know the amount of tiles
       }
 
-      function calculateScore(){
+      function calculateScore(){//Calculates the value of tiles and adds accordingly
         if(doubleWordFlag){ 
            doubleWordFlag = false;
         }
@@ -64,7 +77,7 @@ $(function() {
         $totalscore.text("Total Score: " + newScore );
       }
  
-      function reverToRack(event, ui){
+      function reverToRack(event, ui){//If the tiles are not placed correctly, they can drop the file
           $(this).data("ui-draggable").originalPosition = {
                 top : 0,
                 left : 0
@@ -72,7 +85,7 @@ $(function() {
             return !event;
       }
  
-     function removePoints($letterTile, $boardTile){
+     function removePoints($letterTile, $boardTile){//when removing tiles, remove the score, and update scoreboard
         var $currScore = $("#score");
         if($boardTile.attr("class") == "doubleWord ui-droppable ui-droppable-active"){
             if(doubleWordFlag == true){
@@ -95,30 +108,30 @@ $(function() {
           console.log("test", doubleWordFlag);
       }
  
-      function addPoints($letterTile, $boardTile){
+      function addPoints($letterTile, $boardTile){//add the points accordingly
           var $currScore = $("#score");
           if($boardTile.attr("class") == "doubleWord ui-droppable"){
             if(doubleWordFlag == false){
               currentScore *= 2;
             }
-            doubleWordFlag = true;
+            doubleWordFlag = true;//multiply for the double word worth
             currentScore += ($letterTile.attr("points") * $boardTile.attr("multiplier")) * 2;
             $currScore.text("Current Word Score: " + "+" + currentScore);
           }
           else{
-            var letterScore =  $letterTile.attr("points") * $boardTile.attr("multiplier");
+            var letterScore =  $letterTile.attr("points") * $boardTile.attr("multiplier");//multiply for the double letter worth
             if(doubleWordFlag){
                 currentScore += letterScore * 2;
                 $currScore.text("Current Word Score: " + "+" + currentScore);
               }
             else{
-                currentScore += letterScore;
+                currentScore += letterScore;//add and update the score
                 $currScore.text("Current Word Score: " + "+" + currentScore);
             }
           }
       }
       
-      function handleTileRemoved(event, ui){
+      function handleTileRemoved(event, ui){//This is to remove the tiles with drag and drog
         var $this = $(this);
         var draggableId = ui.draggable.attr("id");
         var droppableId = $(this).attr("id");
@@ -135,7 +148,7 @@ $(function() {
         }
       }
  
-      function handleDropEvent(event, ui) {
+      function handleDropEvent(event, ui) {//to recognize the drop and what to do
           var $this = $(this);
           var draggableId = ui.draggable.attr("id");
           var draggableLetter = ui.draggable.attr("letter");
@@ -163,7 +176,7 @@ $(function() {
             addPoints(ui.draggable, $(this));
  
           }
-          updateWord();
+          updateWord();//update the word created label
  
           ui.draggable.position({
             my: "center",
@@ -176,7 +189,7 @@ $(function() {
       } 
  
      
-      function updateWord(){
+      function updateWord(){//recognize the word the player made and store it for user to see
         var currentWord = " ";
         $("#tileBoard div").each(function(index,$el){
           if($el.getAttribute("letter") != -1){
@@ -187,7 +200,7 @@ $(function() {
       }
  
       
-      function fillRackForNextHand(){
+      function fillRackForNextHand(){//when rack is less than 7, add the missing value of tiles
         remainingTiles = (tilePool.length < 7) ? tilePool.length : 7; 
         if(remainingTiles == 0){ 
           alert("There are no tiles remaining. Play again?");
@@ -206,7 +219,7 @@ $(function() {
         }
       }
  
-      function addTilesToRack(resetFlag){
+      function addTilesToRack(resetFlag){//when the game needs 7 tiles, they will push in 7 tiles
          if(resetFlag){
            for(i = 0; i < currentRack.length; i++){
              var newTileImage = document.createElement("img");
