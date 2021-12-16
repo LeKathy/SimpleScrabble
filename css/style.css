@@ -1,0 +1,147 @@
+#header{
+    text-align: center;
+    text-transform: uppercase;
+    font: bold italic 250% fantasy;
+    padding: 20px;
+    border: 5px solid #ffbb00;
+}
+
+#container{
+    color: rgb(71, 49, 49);
+    background-color: beige;
+    height: 600 px;
+    width:1000px;
+    margin: auto;
+}
+
+body{
+    background-color: burlywood;
+}
+
+#game-buttons{
+    text-align: center;
+    margin-bottom: 15px;
+  }
+
+#reset_tile, #next_word, #new_game, #refill_pool {
+    border-radius: 2px;
+    font: 100% monospace;
+}
+
+#scoreboard{
+    justify-content: center;
+    font: italic 100% monospace;
+    color: black;
+}
+
+#score, #total_score, #tiles_remaining, #current_word{
+    justify-content: center;
+    text-align: center;
+}
+
+#tileBoard .ui-droppable-hover {
+    box-shadow: 1px 1px 25px rgb(253, 240, 55);
+}
+
+#tileBoard {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+    box-shadow: 1px 1px 15px rgb(128, 73, 0);
+  }
+
+#tileRack {
+    background: url("../images/scrabble-tile-holder-406774_640.png");
+    margin: auto;
+    height: 230px;
+    background-repeat: no-repeat;
+    width: 650px;
+    margin-top: 20px;
+    justify-content: center;
+}
+
+#innerRack{
+    border: none;
+    text-align: center;
+    vertical-align: middle;
+    padding-bottom: 0px;
+    padding-top: 60px;
+    height: 60px;
+    margin-bottom: 40px;
+  
+}
+
+.boardTile {
+    display: inline-block;
+    background: url("../images/Scrabble_Tiles/Scrabble_Tile_BlankTile.png");
+    width: 80px;
+    height: 85px;
+    background-repeat: no-repeat;
+}
+
+.doubleLetter {
+    display: inline-block;
+    background: url("../images/Scrabble_Tiles/Scrabble_Tile_DoubleLetter.png");
+    width: 80px;
+    height: 85px;
+    background-repeat: no-repeat;
+ }
+
+.doubleWord {
+    display: inline-block;
+    background: url("../images/Scrabble_Tiles/Scrabble_Tile_DoubleWord.png");
+    width: 80px;
+    height: 85px;
+    background-repeat: no-repeat;
+}
+
+.blankTileLetters {
+    width: 50px;
+    height: 50px;
+    margin: auto;
+}
+
+.no-close .ui-dialog-titlebar-close {
+    display: none;
+}
+
+#snackbar {
+    visibility: hidden; /* Hidden by default. Visible on click */
+    min-width: 250px; /* Set a default minimum width */
+    margin-left: -125px; /* Divide value of min-width by 2 */
+    background-color: #333; /* Black background color */
+    color: #fff; /* White text color */
+    text-align: center; /* Centered text */
+    border-radius: 2px; /* Rounded borders */
+    padding: 16px; /* Padding */
+    position: fixed; /* Sit on top of the screen */
+    z-index: 1; /* Add a z-index if needed */
+    left: 50%; /* Center the snackbar */
+    bottom: 30px; /* 30px from the bottom */
+}
+
+#snackbar.show {
+    visibility: visible; 
+    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+@-webkit-keyframes fadein {
+    from {bottom: 0; opacity: 0;}
+    to {bottom: 30px; opacity: 1;}
+}
+  
+@keyframes fadein {
+    from {bottom: 0; opacity: 0;}
+    to {bottom: 30px; opacity: 1;}
+}
+  
+@-webkit-keyframes fadeout {
+    from {bottom: 30px; opacity: 1;}
+    to {bottom: 0; opacity: 0;}
+}
+  
+@keyframes fadeout {
+    from {bottom: 30px; opacity: 1;}
+    to {bottom: 0; opacity: 0;}
+}
